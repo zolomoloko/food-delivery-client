@@ -1,43 +1,58 @@
 "use client";
 
 import { FoodCard } from "@/components/food";
+import { useEffect, useState } from "react";
 
-export const foodWithCategories = [
-  {
-    _id: "1",
-    categoryName: "categoryName1",
-    count: 1,
-    foods: [
-      {
-        _id: "1",
-        foodName: "foodName1",
-        price: 1200,
-        image: "",
-        ingredients: "ingredients ingredients ingredients",
-        createdAt: "string",
-        updatedAt: "",
-      },
-    ],
-  },
-  {
-    _id: "2",
-    categoryName: "categoryName2",
-    count: 2,
-    foods: [
-      {
-        _id: "2",
-        foodName: "foodName2",
-        price: 12001,
-        image: "",
-        ingredients: "ingredients ingredients ingredients",
-        createdAt: "string",
-        updatedAt: "",
-      },
-    ],
-  },
-];
+// export const foodWithCategories = [
+//   {
+//     _id: "1",
+//     categoryName: "categoryName1",
+//     count: 1,
+//     foods: [
+//       {
+//         _id: "1",
+//         foodName: "foodName1",
+//         price: 1200,
+//         image: "",
+//         ingredients: "ingredients ingredients ingredients",
+//         createdAt: "string",
+//         updatedAt: "",
+//       },
+//     ],
+//   },
+//   {
+//     _id: "2",
+//     categoryName: "categoryName2",
+//     count: 2,
+//     foods: [
+//       {
+//         _id: "2",
+//         foodName: "foodName2",
+//         price: 12001,
+//         image: "",
+//         ingredients: "ingredients ingredients ingredients",
+//         createdAt: "string",
+//         updatedAt: "",
+//       },
+//     ],
+//   },
+// ];
 
 export const FoodsWithCategories = () => {
+  const [foodWithCategories, setFoodWithCategories] = useState([])
+  useEffect(() => {
+    const getCategories = async () => {
+      const response = await fetch(
+        "http://localhost:4200/food/getFoodsWithCategories"
+      ); 
+      const data = await response.json();
+      console.log(data);
+      
+      setFoodWithCategories(data.foodWithCategories);
+    };
+    getCategories();
+  }, []); 
+  return null;
   if (!foodWithCategories?.length) return null;
 
   const nonEmptyCategories = foodWithCategories.filter(
