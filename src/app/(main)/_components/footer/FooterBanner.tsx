@@ -9,3 +9,4 @@ export const FooterBanner = () => {
     </div>
   );
 };
+//type uguh estooi heseg
