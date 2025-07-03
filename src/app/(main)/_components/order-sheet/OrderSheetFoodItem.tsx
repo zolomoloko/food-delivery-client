@@ -3,8 +3,13 @@ import { Button } from "@/components/ui/button";
 
 import { CircleX, Minus, Plus } from "lucide-react";
 import Image from "next/image";
+import { FoodItem } from "../../../../../types/type";
+type SheetItemType = {
+  "food": FoodItem,
+  "quantity": number
+}
 
-export const OrderSheetFoodItem = ({ food, quantity }) => {
+export const OrderSheetFoodItem = ({ food, quantity }: SheetItemType) => {
   return (
     <>
       <div className="flex gap-3">

@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChangeEvent, useState } from "react";
 import { ImageUploader } from "./ImageUploader";
+import { toast } from "sonner";
 
 type AddFoodModalProps = {
   categoryName: string;
@@ -35,7 +36,8 @@ export const AddFoodModal = ({
   const [foodInfo, setFoodInfo] = useState<FoodInfo>({
     foodName: "",
     price: "",
-    image: "",
+    image:
+      "https://i.pinimg.com/736x/4d/39/23/4d392390b10c63c99e865709cb0146fa.jpg",
     ingredients: "",
     category: categoryId,
   });
@@ -52,13 +54,34 @@ export const AddFoodModal = ({
   };
 
   const handleCreateFood = async () => {
-    setFoodInfo({
-      foodName: "",
-      price: "",
-      image: "",
-      ingredients: "",
-      category: categoryId,
-    });
+    try {
+      const response = await fetch("http://localhost:3002/food", {
+        method: "POST",
+        body: JSON.stringify(foodInfo),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create food");
+      }
+
+      const category = await response.json();
+      setFoodInfo({
+        foodName: "",
+        price: "",
+        image:
+          "https://i.pinimg.com/736x/4d/39/23/4d392390b10c63c99e865709cb0146fa.jpg",
+        ingredients: "",
+        category: categoryId,
+      });
+      toast.success(
+        `Category ${category.foodCategory.categoryName} created successfully`
+      );
+    } catch (error) {
+      toast.error(`Failed to create category ${error}`);
+    }
   };
 
   const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {

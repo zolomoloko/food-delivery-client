@@ -2,13 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { FoodsWithCategories } from "./FoodsWithCategories";
-type Category = {
-  _id: string;
-  categoryName: string;
-  cleatedAt: string;
-  updatedAt: string;
-  __v: number;
-};
+import { Category } from "../../../../../types/type";
+
 
 // const categories = [
 //   {
@@ -32,16 +27,14 @@ type Category = {
 
 export const FoodCategories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  console.log(categories);
   
   useEffect(() => {
     const getCategories = async () => {
       const response = await fetch(
-        "http://localhost:4200/category"
+        "http://localhost:3002/category"
       );
       const data = await response.json();
-      console.log(data);
-      
+      console.log(data)
       setCategories(data.foodCategory);
     };
     getCategories();

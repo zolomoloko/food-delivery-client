@@ -1,26 +1,42 @@
 "use client";
 
-import { foodWithCategories } from "@/app/(main)/_components/food-with-category/FoodsWithCategories";
+
 import { AddFoodModal } from "./AddFoodModal";
 import { AdminFoodCard } from "./AdminFoodCard";
 import { AdminFoodSkeleton } from "./AdminFoodSkeleton";
+import { useEffect, useState } from "react";
+import { Category } from "../../../../types/type";
 
-export type FoodCategory = {
-  _id: string;
-  categoryName: string;
-  count: number;
-  foods: {
-    _id: string;
-    foodName: string;
-    price: number;
-    image: string;
-    ingredients: string;
-    createdAt?: string;
-    updatedAt?: string;
-  }[];
-};
+// export type FoodCategory = {
+//   _id: string;
+//   categoryName: string;
+//   count: number;
+//   foods: {
+//     _id: string;
+//     foodName: string;
+//     price: number;
+//     image: string;
+//     ingredients: string;
+//     createdAt?: string;
+//     updatedAt?: string;
+//   }[];
+// };
 
 export const AdminFoodsSection = () => {
+  const [foodWithCategories, setFoodWithCategories] = useState<Category[]>([])
+    useEffect(() => {
+      const getCategories = async () => {
+        const response = await fetch(
+          "http://localhost:3002/food/getFoodsWithCategories"
+        ); 
+        const data = await response.json();
+        console.log(data);
+        
+        setFoodWithCategories(data.getFoodsWithCategories);
+      };
+      getCategories();
+    }, []); 
+    
   if (!foodWithCategories) return null;
 
   if (!foodWithCategories.length) return <AdminFoodSkeleton />;
