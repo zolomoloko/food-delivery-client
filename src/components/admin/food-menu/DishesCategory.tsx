@@ -25,7 +25,7 @@ export const DishesCategory = () => {
       const data = await response.json();
       console.log(data);
       
-      setFoodWithCategories(data.getFoodsWithCategories);
+      setFoodWithCategories(data.foodsWithCategories);
     };
     getCategories();
   }, []); 

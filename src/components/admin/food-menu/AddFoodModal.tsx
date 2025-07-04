@@ -55,7 +55,7 @@ export const AddFoodModal = ({
 
   const handleCreateFood = async () => {
     try {
-      const response = await fetch("http://localhost:3002/food", {
+      await fetch("http://localhost:3002/food", {
         method: "POST",
         body: JSON.stringify(foodInfo),
         headers: {
@@ -63,11 +63,6 @@ export const AddFoodModal = ({
         },
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to create food");
-      }
-
-      const category = await response.json();
       setFoodInfo({
         foodName: "",
         price: "",
@@ -76,9 +71,7 @@ export const AddFoodModal = ({
         ingredients: "",
         category: categoryId,
       });
-      toast.success(
-        `Category ${category.foodCategory.categoryName} created successfully`
-      );
+      toast.success("Амжиттай хоол нэмэгдлээ");
     } catch (error) {
       toast.error(`Failed to create category ${error}`);
     }
