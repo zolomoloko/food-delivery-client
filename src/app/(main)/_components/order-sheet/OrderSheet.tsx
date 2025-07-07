@@ -6,6 +6,8 @@ import {
 } from "@/components/ui/sheet";
 import { ShoppingCart } from "lucide-react";
 import { OrderSheetContents } from ".";
+import { useContext } from "react";
+import { FoodCartContext } from "@/providers/FoodCart";
 
 type OrderSheetProps = {
   open: boolean;
@@ -18,13 +20,15 @@ export const OrderSheet = ({
   closeSidebar,
   openModal,
 }: OrderSheetProps) => {
+
+  // const foodCart = useContext(FoodCartContext)
   return (
     <Sheet open={open} onOpenChange={closeSidebar}>
       <SheetContent className="sm:max-w-[535px] rounded-s-lg border-none bg-[#404040]">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-3 text-white">
             <ShoppingCart size={24} />
-            Order detail
+            Order detail 
           </SheetTitle>
         </SheetHeader>
 

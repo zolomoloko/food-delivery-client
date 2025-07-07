@@ -34,7 +34,7 @@ export const FoodCategories = () => {
         "http://localhost:3002/category"
       );
       const data = await response.json();
-      console.log(data)
+    
       setCategories(data.foodCategory);
     };
     getCategories();
