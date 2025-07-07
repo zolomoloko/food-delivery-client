@@ -25,7 +25,7 @@ import { FoodCartContext } from "@/providers/FoodCart";
 // ];
 export const OrderSheetCart = () => {
 
-  const foodCart = useContext(FoodCartContext);
+  const {foodCart} = useContext(FoodCartContext);
 console.log(foodCart)
 
   const renderFoodCard = () => {
@@ -33,8 +33,8 @@ console.log(foodCart)
       return foodCart?.map((item) => {
         return (
           <OrderSheetFoodItem
-            key={item.price}
-            food={item.foodName}
+            key={item.food._id}
+            food={item.food}
             quantity={item.quantity}
           />
         );

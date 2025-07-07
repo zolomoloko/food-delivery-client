@@ -12,12 +12,12 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { useContext, useState } from "react";
-import { FoodItem } from "../../../types/type";
+import { FoodType } from "../../../types/type";
 import { FoodCartContext } from "@/providers/FoodCart";
 
 
 type FoodDetailModalType = {
-  food: FoodItem;
+  food: FoodType;
   isModalOpen: boolean;
   onToggleModal: () => void;
 };
@@ -43,11 +43,11 @@ export const FoodDetailModal = ({
   };
 
   const handleAddToCart = () => {
-    setFoodCart({
-       foodName: foodName,
-       price: price,
+    setFoodCart([{
+       food: food,
+      //  price: price,
        quantity: quantity,
-      });
+      }]);
     onToggleModal();
   };
 
