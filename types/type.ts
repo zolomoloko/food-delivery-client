@@ -16,6 +16,7 @@ export type Food = {
   ingredients: string;
   category: string;
   __v: number;
+  quantity: number;
 };
 
 export type FoodItem = {
@@ -23,6 +24,7 @@ export type FoodItem = {
   price: number; 
   image: string;
   ingredients: string;
+  _id: string;
 }
 
 

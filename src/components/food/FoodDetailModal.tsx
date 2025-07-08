@@ -15,7 +15,6 @@ import { useContext, useState } from "react";
 import { FoodType } from "../../../types/type";
 import { FoodCartContext } from "@/providers/FoodCart";
 
-
 type FoodDetailModalType = {
   food: FoodType;
   isModalOpen: boolean;
@@ -28,11 +27,13 @@ export const FoodDetailModal = ({
   onToggleModal,
 }: FoodDetailModalType) => {
   const [quantity, setQuantity] = useState<number>(1);
+  
 
-  const foodCart = useContext( FoodCartContext);
-  const {setFoodCart} = foodCart
+  const { setFoodCart, foodCart } = useContext(FoodCartContext);
+  // const {setFoodCart} = foodCart
 
   const { foodName, image, ingredients, price } = food;
+  
 
   const addQuantity = () => {
     setQuantity((prev) => prev + 1);
@@ -43,13 +44,20 @@ export const FoodDetailModal = ({
   };
 
   const handleAddToCart = () => {
-    setFoodCart([{
-       food: food,
-      //  price: price,
-       quantity: quantity,
-      }]);
+    setFoodCart([
+      ...foodCart,
+      {
+        food: food,
+        price: price,
+        quantity: quantity,
+      },
+    ]);
+    // console.log(typeof price, price);
+    // console.log(typeof quantity, quantity);
+
     onToggleModal();
   };
+  const totalPrice = price * quantity;
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onToggleModal}>
@@ -91,7 +99,7 @@ export const FoodDetailModal = ({
                     Total price:
                   </p>
                   <div className="text-lg font-semibold text-[#09090B]">
-                    <p>{price * quantity}₮</p>
+                    <p>{totalPrice}₮</p>
                   </div>
                 </div>
                 <div className="flex w-[121px] justify-around">

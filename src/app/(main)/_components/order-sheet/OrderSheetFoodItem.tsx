@@ -4,12 +4,20 @@ import { Button } from "@/components/ui/button";
 import { CircleX, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { FoodItem } from "../../../../../types/type";
+import { useState } from "react";
 type SheetItemType = {
   "food": FoodItem,
-  "quantity": number
+  "quantity": number,
+  "price": number,
+  "onDelete": (id: string) => void
 }
 
-export const OrderSheetFoodItem = ({ food, quantity }: SheetItemType) => {
+
+
+
+export const OrderSheetFoodItem = ({ food, quantity, price, onDelete}: SheetItemType) => {
+
+
   return (
     <>
       <div className="flex gap-3">
@@ -36,6 +44,7 @@ export const OrderSheetFoodItem = ({ food, quantity }: SheetItemType) => {
               size={50}
               color="red"
               className="cursor-pointer"
+              onClick={() => onDelete(food?._id)}
             />
           </div>
 
@@ -52,7 +61,7 @@ export const OrderSheetFoodItem = ({ food, quantity }: SheetItemType) => {
               </Button>
             </div>
 
-            <h4 className="font-bold">12₮</h4>
+            <h4 className="font-bold">{price * quantity}₮</h4>
           </div>
         </div>
       </div>

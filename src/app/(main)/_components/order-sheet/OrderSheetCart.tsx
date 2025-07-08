@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OrderSheetEmptyCard } from "./OrderSheetEmptyCard";
 import { OrderSheetFoodItem } from "./OrderSheetFoodItem";
@@ -24,9 +24,13 @@ import { FoodCartContext } from "@/providers/FoodCart";
 //   },
 // ];
 export const OrderSheetCart = () => {
+  
+  const { foodCart, setFoodCart} = useContext(FoodCartContext);
+  console.log(foodCart);
 
-  const {foodCart} = useContext(FoodCartContext);
-console.log(foodCart)
+  const handleDeleteItem = (id: string) => {
+    setFoodCart((prev) => prev.filter((item) => item.food._id !== id));
+  };
 
   const renderFoodCard = () => {
     if (foodCart?.length) {
@@ -36,6 +40,8 @@ console.log(foodCart)
             key={item.food._id}
             food={item.food}
             quantity={item.quantity}
+            price={item.price}
+            onDelete={handleDeleteItem}
           />
         );
       });
