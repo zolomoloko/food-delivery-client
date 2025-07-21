@@ -40,18 +40,18 @@ import { Category } from "../../../../../types/type";
 // ];
 
 export const FoodsWithCategories = () => {
-  const [foodWithCategories, setFoodWithCategories] = useState<Category[]>([])
+  const [foodWithCategories, setFoodWithCategories] = useState<Category[]>([]);
   useEffect(() => {
     const getCategories = async () => {
       const response = await fetch(
         "http://localhost:3002/food/getFoodsWithCategories"
-      ); 
+      );
       const data = await response.json();
-      
+
       setFoodWithCategories(data.foodsWithCategories);
     };
     getCategories();
-  }, []); 
+  }, []);
 
   if (!foodWithCategories?.length) return null;
 
@@ -71,11 +71,12 @@ export const FoodsWithCategories = () => {
               return (
                 <div key={food?._id}>
                   <FoodCard
-                    foodName={food?.foodName}
-                    price={food?.price}
-                    image={food?.image}
-                    ingredients={food?.ingredients}
-                    _id={food?._id}
+                    // foodName={food?.foodName}
+                    // price={food?.price}
+                    // image={food?.image}
+                    // ingredients={food?.ingredients}
+                    // _id={food?._id}
+                    food={food}
                   />
                 </div>
               );

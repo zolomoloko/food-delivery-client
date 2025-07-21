@@ -4,29 +4,29 @@ export type Category = {
   cleatedAt: string;
   updatedAt: string;
   __v: number;
-  foods: Food[]
-  count: number
+  foods: Food[];
 };
 
 export type Food = {
   _id: string;
   foodName: string;
-  price: number; 
+  price: number;
   image: string;
   ingredients: string;
-  category: string;
+  category: CategoryType;
   __v: number;
   quantity: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type FoodItem = {
   foodName: string;
-  price: number; 
+  price: number;
   image: string;
   ingredients: string;
   _id: string;
-}
-
+};
 
 export type FoodType = {
   _id: string;

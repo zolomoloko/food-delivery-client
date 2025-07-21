@@ -4,12 +4,13 @@ import { Button } from "@/components/ui/button";
 import { CircleX, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { FoodItem } from "../../../../../types/type";
-import { useState } from "react";
+
 type SheetItemType = {
   "food": FoodItem,
   "quantity": number,
   "price": number,
   "onDelete": (id: string) => void
+ 
 }
 
 

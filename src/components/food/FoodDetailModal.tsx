@@ -27,13 +27,10 @@ export const FoodDetailModal = ({
   onToggleModal,
 }: FoodDetailModalType) => {
   const [quantity, setQuantity] = useState<number>(1);
-  
 
   const { setFoodCart, foodCart } = useContext(FoodCartContext);
-  // const {setFoodCart} = foodCart
 
   const { foodName, image, ingredients, price } = food;
-  
 
   const addQuantity = () => {
     setQuantity((prev) => prev + 1);
@@ -47,14 +44,14 @@ export const FoodDetailModal = ({
     setFoodCart([
       ...foodCart,
       {
-        food: food,
-        price: price,
-        quantity: quantity,
+        food,
+        price,
+        quantity,
       },
     ]);
     // console.log(typeof price, price);
     // console.log(typeof quantity, quantity);
-
+    setQuantity(1);
     onToggleModal();
   };
   const totalPrice = price * quantity;
