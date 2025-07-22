@@ -70,14 +70,7 @@ export const FoodsWithCategories = () => {
             {category?.foods.map((food) => {
               return (
                 <div key={food?._id}>
-                  <FoodCard
-                    // foodName={food?.foodName}
-                    // price={food?.price}
-                    // image={food?.image}
-                    // ingredients={food?.ingredients}
-                    // _id={food?._id}
-                    food={food}
-                  />
+                  <FoodCard {...food} />
                 </div>
               );
             })}

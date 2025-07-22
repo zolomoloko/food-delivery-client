@@ -45,3 +45,8 @@ export type CategoryType = {
   createdAt: string;
   updatedAt: string;
 };
+export type FoodsWithCategory = {
+  _id: string;
+  categoryName: string;
+  foods: FoodType[];
+};

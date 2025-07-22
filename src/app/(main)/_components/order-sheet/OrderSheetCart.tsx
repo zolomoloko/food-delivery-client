@@ -25,12 +25,9 @@ import { FoodCartContext } from "@/providers/FoodCart";
 // ];
 export const OrderSheetCart = () => {
   
-  const { foodCart, setFoodCart} = useContext(FoodCartContext);
+  const { foodCart } = useContext(FoodCartContext);
   console.log(foodCart);
 
-  const handleDeleteItem = (id: string) => {
-    setFoodCart((prev) => prev.filter((item) => item.food._id !== id));
-  };
 
   const renderFoodCard = () => {
     if (foodCart?.length) {
@@ -41,7 +38,6 @@ export const OrderSheetCart = () => {
             food={item.food}
             quantity={item.quantity}
             price={item.price}
-            onDelete={handleDeleteItem}
           />
         );
       });

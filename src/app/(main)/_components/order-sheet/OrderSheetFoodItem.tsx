@@ -4,21 +4,19 @@ import { Button } from "@/components/ui/button";
 import { CircleX, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { FoodItem } from "../../../../../types/type";
-
-type SheetItemType = {
-  "food": FoodItem,
-  "quantity": number,
-  "price": number,
-  "onDelete": (id: string) => void
- 
-}
+import { FoodWithQuantity, useFoodCart } from "@/providers/FoodCart";
+import { FC } from "react";
 
 
 
+export const OrderSheetFoodItem: FC<FoodWithQuantity> = ({
+  food,
+  quantity,
+  price,
 
-export const OrderSheetFoodItem = ({ food, quantity, price, onDelete}: SheetItemType) => {
-
-
+}) => {
+  
+const { incrementFoodQuantity, decrimentFoodQuantity, removeFromCart } = useFoodCart();
   return (
     <>
       <div className="flex gap-3">
@@ -45,24 +43,30 @@ export const OrderSheetFoodItem = ({ food, quantity, price, onDelete}: SheetItem
               size={50}
               color="red"
               className="cursor-pointer"
-              onClick={() => onDelete(food?._id)}
+              onClick={() => removeFromCart(food?._id)}
             />
           </div>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <Button variant="ghost">
+              <Button
+                variant="ghost"
+                onClick={() => decrimentFoodQuantity(food._id)}
+              >
                 <Minus />
               </Button>
 
               <div className="text-lg font-semibold">{quantity}</div>
 
-              <Button variant="ghost">
+              <Button
+                variant="ghost"
+                onClick={() => incrementFoodQuantity(food._id)}
+              >
                 <Plus />
               </Button>
             </div>
 
-            <h4 className="font-bold">{price * quantity}₮</h4>
+            <h4 className="font-bold">{price}₮</h4>
           </div>
         </div>
       </div>

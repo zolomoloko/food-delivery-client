@@ -51,7 +51,7 @@ export const FoodCategories = () => {
           {categories?.map((category) => (
             <div
               key={category._id}
-              className="flex items-center px-5 py-1 rounded-full bg-background"
+              className="flex items-center px-2 py-3 rounded-full bg-background"
             >
               <div>{category?.categoryName}</div>
             </div>

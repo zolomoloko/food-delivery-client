@@ -7,17 +7,12 @@ import { MouseEventHandler, useState } from "react";
 import { Button } from "../ui/button";
 import { AddToCartAlert } from "./AddToCartAlert";
 import { FoodDetailModal } from "./FoodDetailModal";
-import { Food } from "../../../types/type";
-import { FoodType } from "@/constants/food";
+import { FoodType } from "../../../types/type";
 
-type FoodCardProps = {
-  food: FoodType;
-};
+type FoodCardProps = FoodType;
 
-export const FoodCard = ({ food }: FoodCardProps) => {
-  
-  const { foodName, price, image, ingredients } = food;
-
+export const FoodCard = (props: FoodCardProps) => {
+  const { foodName, image, ingredients, price } = props;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
 
@@ -26,7 +21,6 @@ export const FoodCard = ({ food }: FoodCardProps) => {
   };
 
   const handleAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
-    console.log(event);
     setShowAlert(true);
   };
 
@@ -61,7 +55,7 @@ export const FoodCard = ({ food }: FoodCardProps) => {
         </Card>
       </div>
       <FoodDetailModal
-        food={food}
+        food={props}
         isModalOpen={isModalOpen}
         onToggleModal={onToggleModal}
       />
