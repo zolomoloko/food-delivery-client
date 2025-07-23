@@ -8,6 +8,8 @@ export type FoodWithQuantity = {
   quantity: number;
   price: number;
 };
+// FoodCartContextProvider — Context үүсгэж, хэрэглэгчдэд өгдөг
+// useFoodCart — Context-ыг component дотроос ашиглах боломжтой hook
 
 type FoodCartContextType = {
   foodCart: FoodWithQuantity[];
@@ -29,6 +31,7 @@ export default function FoodCartContextProvider({
   const [foodCart, setFoodCart] = useState<FoodWithQuantity[]>([]);
 
   const addToCart = (newFood: FoodWithQuantity) => {
+     // өмнө нь байсан эсэхийг шалгана
     const existingFood = foodCart.find(
       ({ food }) => food._id === newFood.food._id
     );
