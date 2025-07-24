@@ -2,9 +2,9 @@
 
 import { FoodCard } from "@/components/food";
 import { useEffect, useState } from "react";
-import { Category } from "../../../../../types/type";
+import { Category, FoodsWithCategory, FoodType } from "../../../../../types/type";
 
-// export const foodWithCategories = [
+// export const foodWithCategories: FoodsWithCategory [] = [
 //   {
 //     _id: "1",
 //     categoryName: "categoryName1",
@@ -38,6 +38,11 @@ import { Category } from "../../../../../types/type";
 //     ],
 //   },
 // ];
+type FoodsWithCategoriesType = {
+  categoryName: string;
+  count: number;
+  foods: FoodType[];
+};
 
 export const FoodsWithCategories = () => {
   const [foodWithCategories, setFoodWithCategories] = useState<Category[]>([]);

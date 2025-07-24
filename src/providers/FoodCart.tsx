@@ -31,7 +31,7 @@ export default function FoodCartContextProvider({
   const [foodCart, setFoodCart] = useState<FoodWithQuantity[]>([]);
 
   const addToCart = (newFood: FoodWithQuantity) => {
-     // өмнө нь байсан эсэхийг шалгана
+    // өмнө нь байсан эсэхийг шалгана
     const existingFood = foodCart.find(
       ({ food }) => food._id === newFood.food._id
     );
@@ -47,11 +47,10 @@ export default function FoodCartContextProvider({
   const incrementFoodQuantity = (foodId: string) => {
     const updatedFoodCart = foodCart.map(({ food, quantity, price }) => {
       if (food._id === foodId) {
-    
         return {
           food: food,
           quantity: quantity + 1,
-          price: quantity * Number(food.price),
+          price: (quantity + 1) * Number(food.price),
         };
       } else {
         return {
@@ -69,8 +68,8 @@ export default function FoodCartContextProvider({
       if (food._id === foodId) {
         return {
           food: food,
-          quantity: quantity - 1,
-          price: (quantity - 1) * food.price,
+          quantity: quantity > 1 ? quantity - 1 : 0,
+          price: (quantity > 1 ? quantity - 1 : 0) * food.price,
         };
       } else {
         return {
@@ -83,7 +82,6 @@ export default function FoodCartContextProvider({
 
     setFoodCart(updatedFoodCart);
   };
-   
 
   const removeFromCart = (id: string) => {
     setFoodCart((prev) => prev.filter((item) => item.food._id !== id));

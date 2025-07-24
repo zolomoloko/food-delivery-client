@@ -23,7 +23,7 @@ const { incrementFoodQuantity, decrimentFoodQuantity, removeFromCart } = useFood
         <div className="w-[124px] h-[120px] relative rounded-lg overflow-hidden">
           <Image
             className="fill"
-            src={food?.image}
+            src={food?.image || ""}
             objectFit="cover"
             layout="fill"
             alt={food?.foodName}
