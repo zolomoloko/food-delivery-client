@@ -12,8 +12,8 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 const passwordSchema = Yup.object({
-  password: Yup.string().required(),
-  confirmPassword: Yup.string().required(),
+  password: Yup.string().required(Хоосон байна),
+  confirmPassword: Yup.string().oneOf([Yup.ref("password"), undefined], "Шалгалдаа"). required(),
 });
 
 type PasswordBoxProps = {
