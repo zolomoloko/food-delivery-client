@@ -11,6 +11,7 @@ export const Signup = () => {
   const [password, setPassword] = useState("");
 
   const handleNext = () => setStep(step + 1);
+  const handleBack = () => setStep(step - 1);
 
   const onChangeEmail = (inputEmail: string) => setEmail(inputEmail);
 
@@ -22,7 +23,7 @@ export const Signup = () => {
       handleNext={handleNext}
       onChangeEmail={onChangeEmail}
     />,
-    <SignUpPasswordBox key={1} />,
+    <SignUpPasswordBox key={1} email={email} handleBack={handleBack}/>,
   ];
 
   return StepComponents[step];

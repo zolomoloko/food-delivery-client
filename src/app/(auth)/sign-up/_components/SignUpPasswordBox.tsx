@@ -10,25 +10,50 @@ import { BackButton } from "@/components/button";
 import { FooterButtons } from "@/components/auth";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const passwordSchema = Yup.object({
-  password: Yup.string().required(Хоосон байна),
-  confirmPassword: Yup.string().oneOf([Yup.ref("password"), undefined], "Шалгалдаа"). required(),
+  password: Yup.string().required("Хоосон байна"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), undefined], "Шалгалдаа")
+    .required(),
 });
 
 type PasswordBoxProps = {
+  email: string;
   handleBack: () => void;
 };
 
-export const SignUpPasswordBox = ({ handleBack }: PasswordBoxProps) => {
+const handleSingUp = async (email: string, password: string) => {
+  const response = await axios.post("http://localhost:3002/user", {
+    email,
+    password,
+    phoneNumber: "99778886",
+    address: "jj"
+  });
+  return response;
+};
+
+export const SignUpPasswordBox = ({ email, handleBack }: PasswordBoxProps) => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter()
   const formik = useFormik({
     initialValues: {
       password: "",
       confirmPassword: "",
     },
     validationSchema: passwordSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        setLoading(true)
+        await handleSingUp(email, values.password);
+        router.push('/login')
+        
+      } catch (error) {
+        console.log(error)
+      }
+     setLoading(false)
     },
   });
 
@@ -45,7 +70,6 @@ export const SignUpPasswordBox = ({ handleBack }: PasswordBoxProps) => {
     inputErrorMessage: errors.password,
   };
 
-  
   const confirmPasswordInputProps = {
     name: "confirmPassword",
     placeholder: "confirmPassword",
@@ -70,7 +94,7 @@ export const SignUpPasswordBox = ({ handleBack }: PasswordBoxProps) => {
           <div className="grid items-center w-full gap-6">
             <div className="flex flex-col space-y-1.5 gap-4">
               <FormInput {...passwordInputProps} />
-              <FormInput {...confirmPasswordInputProps}/> 
+              <FormInput {...confirmPasswordInputProps} />
 
               <div className="flex items-center space-x-2">
                 <Checkbox id="showPass" />
@@ -83,7 +107,7 @@ export const SignUpPasswordBox = ({ handleBack }: PasswordBoxProps) => {
               </div>
             </div>
           </div>
-          <FooterButtons buttonText="Let`s Go" />
+          <FooterButtons buttonDisable={loading} buttonText="Let`s Go" />
         </form>
       </CardContent>
 
